@@ -1,7 +1,7 @@
 const express = require("express");
 const Dialogflow = require("@google-cloud/dialogflow");
 const { v4: uuid } = require("uuid");
-const Path = require("path");
+// const Path = require("path");
 const { cleanUpSingle, cleanUpMultiple, parsePossibleFollowUp } = require("./utils/parseDialogFlow");
 
 const app = express();
@@ -16,8 +16,12 @@ app.post("/message", async (req, res, next) => {
   }
 
   const sessionClient = new Dialogflow.SessionsClient({
-    keyFilename: Path.join(__dirname, "./key.json"),
-  });
+    projectId: process.env.PROJECT_ID,
+    credentials: {
+      client_email: process.env.CLIENT_EMAIL,
+      private_key: process.env.PRIVATE_KEY,
+    }
+  })
 
   const sessionPath = sessionClient.projectAgentSessionPath(
     process.env.PROJECT_ID,
