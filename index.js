@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedList = ['http://localhost:3000', 'https://heathervv.com'];
+const allowedList = ['http://localhost:3000', 'http://heathervv.com', 'https://heathervv.com'];
 
 const options = {
   origin: function (origin, callback) {
